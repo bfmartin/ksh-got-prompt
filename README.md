@@ -1,6 +1,6 @@
 # Show the Status of a GOT Repo in a KSH Prompt
 
-This will show the status of a `got` work tree in a `ksh` prompt. It's targeted at developers on the OpenBSD system.
+This will show the status of a `got` work tree in a `ksh` prompt. It's targeted at developers on OpenBSD.
 
 ## To Enable
 
@@ -17,7 +17,7 @@ Copy the file `ksh-got-prompt.sh` somewhere. For example:
 In your kshrc file (e.g. `$HOME/.kshrc` or `/etc/ksh.kshrc`), add the following line:
 
 ~~~
-  . /etc/ksh-got-prompt.sh`
+  . /etc/ksh-got-prompt.sh
 ~~~
 
 In the same file, add this line, or change the existing PS1 line to this:
@@ -83,7 +83,7 @@ Here's what I use:
   export PS1='\[$(if [ $? = 0 ]; then echo "\e[32m";else echo "\e[31m"; fi)\h\e[00m:$? \w $(__got_ps1 "(%s) ")\$ \]'
 ~~~
 
-Rendered as
+Rendered as:
 
 ![Sample prompt](images/prompt-example.png)
 
@@ -91,7 +91,7 @@ Tip: Enclose the prompt string in single quotes. Double quotes won't work as exp
 
 ## Unit Tests
 
-If you want to hack on the code, you may be interested in the unit tests. To run, run this command:
+If you want to hack on the code, you may be interested in the unit tests. To run, use this command:
 
 ~~~
   make test
