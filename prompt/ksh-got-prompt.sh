@@ -26,48 +26,6 @@
 # The repository status will be displayed only if you are currently in a
 # got repository or working tree.
 
-# for future use?
-#
-# Helper function that is meant to be called from __got_ps1. It
-# injects color codes into the appropriate gotstring variables used
-# to build a gotstring.
-# __got_ps1_colorize_gotstring ()
-# {
-#	# Using \[ and \] around colors is necessary to prevent
-#	# issues with command line editing/browsing/completion!
-#	local c_red='\[\e[31m\]'
-#	local c_green='\[\e[32m\]'
-#	local c_lblue='\[\e[1;34m\]'
-#	local c_clear='\[\e[0m\]'
-
-#	local bad_color=$c_red
-#	local ok_color=$c_green
-#	local flags_color="$c_lblue"
-
-#	local branch_color=""
-#	if [ "$detached" = no ]; then
-#		branch_color="$ok_color"
-#	else
-#		branch_color="$bad_color"
-#	fi
-#	c="$branch_color$c"
-
-#	z="$c_clear$z"
-#	if [ "$w" = "*" ]; then
-#		w="$bad_color$w"
-#	fi
-#	if [ -n "$i" ]; then
-#		i="$ok_color$i"
-#	fi
-#	if [ -n "$s" ]; then
-#		s="$flags_color$s"
-#	fi
-#	if [ -n "$u" ]; then
-#		u="$bad_color$u"
-#	fi
-#	r="$c_clear$r"
-# }
-
 # __got_ps1 accepts 0 or 1 arguments (i.e., format string)
 # prints text to add to ksh PS1 prompt (includes branch name)
 __got_ps1()
@@ -146,11 +104,6 @@ __got_ps1()
 		# which branch
 		b=$(got branch)
 	fi
-
-	# for future use?
-	# if [ -n "${GOT_PS1_SHOWCOLORHINTS-}" ]; then
-	#	__got_ps1_colorize_gotstring
-	# fi
 
 	# compose the prompt
 	local f="$w$i$s$u" # combination of states, e.g., "#%" (plus unused vars)
