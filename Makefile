@@ -13,4 +13,4 @@ test:
 # housekeeping tasks. only of interest to the author
 SHX = prompt/ksh-got-prompt.sh bin/*
 XTRAC = Makefile
-sinclude ~/bin/lib/Makefile-global
+sinclude ${HOME}/bin/lib/Makefile-global
