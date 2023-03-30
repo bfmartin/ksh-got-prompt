@@ -30,6 +30,20 @@
 # prints text to add to ksh PS1 prompt (includes branch name)
 __got_ps1()
 {
+	# Using \[ and \] around colors is necessary to prevent
+	# issues with command line editing/browsing/completion!
+	# local c_red='\[\e[31m\]'
+	# local c_brown='\[\e[33m\]'
+	# local c_magenta='\[\e[35m\]'
+	local c_green='\[\e[32m\]'
+	local c_lblue='\[\e[1;34m\]'
+	local c_clear='\[\e[0m\]'
+
+	# local bad_color=$c_red
+	local ok_color="$c_green"
+	local flags_color="$c_lblue"
+	local branch_color="$c_green"
+
 	# save incoming exit status for later
 	local exit=$?
 	# default format
@@ -76,7 +90,8 @@ __got_ps1()
 	local w="" # unused: not sure of its use
 
 	if [ "true" = "$bare_repo" ]; then
-		c="BARE:"
+		c="${branch_color}BARE${c_clear}:"
+
 	elif [ "true" = "$inside_worktree" ]; then
 		# check the results of got status
 
@@ -85,7 +100,7 @@ __got_ps1()
 		# N	non-existent path specified on the command line
 		# !	versioned file was expected on disk but is missing
 		if [ "$(got status -s 'MmN!' | wc -l)" -ne 0 ]; then
-			i='#'
+			i="${ok_color}#"
 		fi
 
 		# A	file scheduled for addition in next commit
@@ -93,21 +108,21 @@ __got_ps1()
 		# D	file scheduled for deletion in next commit
 		# ~	versioned file is obstructed by a non-regular file
 		if [ "$(got status -s 'ACD~' | wc -l)" -ne 0 ]; then
-			i="$i+"
+			i="${ok_color}${i}+"
 		fi
 
 		# ?	unversioned item not tracked by got
 		if [ "$(got status -s '?' | wc -l)" -ne 0 ]; then
-			s='%'
+			s="${flags_color}%"
 		fi
 
 		# which branch
-		b=$(got branch)
+		b="${ok_color}$(got branch)"
 	fi
 
 	# compose the prompt
 	local f="$w$i$s$u" # combination of states, e.g., "#%" (plus unused vars)
-	local gotstring="$c$b${f:+$z$f}$r$p" # add branch
+	local gotstring="${c}${b}${f:+$z$f}${r}${p}${c_clear}" # add branch
 
 	# shell check doesn't like a variable used as a format string
 	# but we can't avoid it because the format string is passed in as

@@ -46,8 +46,6 @@ While lots of information is available through the `got info` and `gotadmin info
 * Repo status: detached upstream / rebase / merge / cherrypick / reverting / bisection
 * Bare repos don't show branch
 
-Plus, colours in the status would be nice.
-
 ### Removed Functionality
 
 These features are in the `git` version that I chose to remove.
